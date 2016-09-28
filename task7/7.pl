@@ -1,8 +1,6 @@
-à(Õ):-not(Õ=âèòÿ), Õ=áîðÿ.
-á(Õ):-Õ=âèòÿ, not(Õ=àëåøà).
-â(Õ):-not(Õ=áîðÿ), not(Õ=âèòÿ).
-êëÿêñà(Õ):-à(Õ), á(Õ), not(â(Õ)).
-êëÿêñà(Õ):-à(Õ), not(á(Õ)),  â(Õ).
-êëÿêñà(Õ):-not(à(Õ)), á(Õ), â(Õ).
-
-
+a(X):-not(X=vitya), X=borya.
+b(X):-X=vitya, not(X=alesha).
+v(X):-not(X=borya).
+blot(X):-a(X), b(X), not(v(X)).
+blot(X):-a(X), not(b(X)),  v(X).
+blot(X):-not(a(X)), b(X), v(X).
