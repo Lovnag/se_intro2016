@@ -1,10 +1,16 @@
-not_lessons(_):-true.
-a(X):-not(X=vitya), X=borya.
-b(X):-X=vitya, not(X=alesha).
-v(X):-not(X=borya), not_lessons(vitya).
-blot(X):- a(X), b(X), not(v(X)).
-blot(X):- a(X), not(b(X)), v(X).
-blot(X):- not(a(X)), b(X), v(X).
+and(T, P):-T , P.
+lessons(_):-true.
+a1(X):-not(X=vitya).
+a2(X):- X=borya.
+b1(X):-X=vitya.
+b2(X):-not(X=alesha).
+v1(X):-not(X=borya).
+v2:- not(lessons(vitya)).
+blot(X):- a1(X), a2(X), b1(X), b2(X), not(v1(X)). 	
+blot(X):- a1(X), a2(X), not(and(b1(X), b2(X))), v1(X).
+blot(X):- not(and(a1(X),a2(X))), b1(X), b2(X), v1(X).
+
+
 
 
 
