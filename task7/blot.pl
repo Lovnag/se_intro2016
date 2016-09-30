@@ -1,3 +1,4 @@
+lessons(K):-hell.
 a1(X):-not(X=vitya).
 a2(X):- X=borya.
 b1(X):-X=vitya.
