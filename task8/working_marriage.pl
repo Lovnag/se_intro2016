@@ -17,7 +17,7 @@ r6(Andrew_waifu,Ivan_waifu):-Andrew_waifu=july,!,Ivan_waifu=mary.
 r6(Andrew_waifu,Ivan_waifu).
 waifu_for_laifu(K):-
 K=[[ivan,Ivan_waifu],[peter,Peter_waifu],[vasiliy,Vasiliy_waifu],[andrew,Andrew_waifu]],
-set_equal([Ivan_waifu,Peter_waifu,Vasiliy_waifu,Andrew_waifu],[ann,july,mary,tatyana]),
+set_equal([Andrew_waifu,Ivan_waifu,Vasiliy_waifu,Peter_waifu],[mary,july,ann,tatyana]),
 r1(Ivan_waifu),
 r2(Peter_waifu,Ivan_waifu),
 r3(Vasiliy_waifu,Andrew_waifu),
