@@ -15,13 +15,9 @@ public class Main{
 		{
 			return false;
 		}
-		else if (s.length()==2)
-        {
-          return true;
-        }
-      else
-		{
-			return(polynome(s.substring(1,s.length()-2)));
+		else
+                {
+			return(polynome(s.substring(1,s.length()-1)));
 		}
 	}
 }
