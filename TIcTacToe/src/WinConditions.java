@@ -12,7 +12,7 @@ public class WinConditions {
         return numberToWin;
     }
 
-    public boolean Met(TurnCoordinates a, Field deck) {
+    public boolean met(TurnCoordinates a, Field deck, boolean indicator) {
         int x = a.getX();
         int y = a.getY();
         int sizX = deck.getSizeX();
@@ -20,7 +20,7 @@ public class WinConditions {
         char[][] theDeck = deck.getDuhField();
         char label = theDeck[x][y];
         int kol = 0;
-        for (int i = 1; i <= sizX; i++) {
+        for (int i = 0; i < sizX; i++) {
             if (theDeck[i][y] == label) {
                 kol++;
             } else {
@@ -46,41 +46,66 @@ public class WinConditions {
 
         int curX = x;
         int curY = y;
-        while ((theDeck[curX][curY] == label) && (curX > 0) && (curX < sizX) && (curY > 0) && (curY < sizY)) {
+        while ((theDeck[curX][curY] == label) && (curX >= 0) && (curX < sizX - 1) && (curY >= 0) && (curY < sizY - 1)) {
             curX++;
             curY++;
         }
-        curX--;
-        curY--;
+
+            if (theDeck[curX][curY] != label) {
+                curX--;
+                curY--;
+            }
+
         kol = 0;
         while (theDeck[curX][curY] == label) {
             kol++;
             if (kol == numberToWin) {
                 return true;
             }
-            curX--;
-            curY--;
+            if ((curX > 0) && (curY > 0)) {
+                curX--;
+                curY--;
+            } else {
+                break;
+            }
 
         }
 
         curX = x;
         curY = y;
-        while ((theDeck[curX][curY] == label) && (curX > 0) && (curX < sizX) && (curY > 0) && (curY < sizY)) {
+        while ((theDeck[curX][curY] == label) && (curX > 0) && (curX <= sizX-1) && (curY >= 0) && (curY < sizY - 1)) {
             curX--;
             curY++;
         }
-        curX++;
-        curY--;
+        if (theDeck[curX][curY] != label) {
+            curX++;
+            curY--;
+        }
         kol = 0;
         while (theDeck[curX][curY] == label) {
             kol++;
             if (kol == numberToWin) {
                 return true;
             }
-            curX++;
-            curY--;
-
+            if ((curX < sizX-1) && (curY > 0)) {
+                curX++;
+                curY--;
+            } else {
+                break;
+            }
         }
-        return false;
+
+        if (indicator) {
+        for (int i = 0; i < sizX; i++) {
+            for (int j = 0; j < sizY; j++) {
+                if ((theDeck[i][j] == ' ') || (theDeck[i][j] == '`')) {
+                    return false;
+                }
+            }
+        }
+        return true;
+        } else {
+            return false;
+        }
     }
 }

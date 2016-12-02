@@ -6,16 +6,12 @@ import static java.lang.String.valueOf;
 
 public class Field {
     private int sizeX, sizeY;
+    private char[][] duhField;
 
-    public Field(int sizeX, int sizeY) {
+    public Field(int sizeX, int sizeY, char[][] duhField) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-
-        for (int i = 0; i != sizeX; i++) {
-            for (int j = 0; j != sizeX; j++) {
-                duhField[i][j] = ' ';
-            }
-        }
+        this.duhField = duhField;
     }
 
     public int getSizeX() {
@@ -26,20 +22,26 @@ public class Field {
         return sizeY;
     }
 
-    private char[][] duhField =
-            new char[sizeX][sizeY];
 
     public char[][] getDuhField() {
         return duhField;
     }
 
     public boolean canTurn(TurnCoordinates a) {
-        return duhField[a.getX()][a.getY()] == ' ';
+        return (duhField[a.getX()][a.getY()] == ' ') || (duhField[a.getX()][a.getY()] == '`');
     }
 
     public void makeATurn(TurnCoordinates a, char label) {
         if (canTurn(a)) {
             duhField[a.getX()][a.getY()] = label;
+        }
+    }
+
+    public void initialize() {
+        for (int i = 0; i < sizeX; i++) {
+            for (int j = 0; j < sizeX; j++) {
+                duhField[i][j] = ' ';
+            }
         }
     }
 
@@ -50,7 +52,6 @@ public class Field {
             }
             System.out.println();
         }
-
-        return null;
+        return " ";
     }
 }

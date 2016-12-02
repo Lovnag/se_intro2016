@@ -5,11 +5,17 @@
 public class Game {
     private int x, y;
     private Player players[];
+    private Field deck;
 
-    public Game(int x, int y, Player[] players) {
+    public Game(int x, int y, Player[] players, Field deck) {
         this.x = x;
         this.y = y;
         this.players = players;
+        this.deck = deck;
+    }
+
+    public void initializing() {
+        deck.initialize();
     }
 
     public int getX() {
@@ -23,8 +29,6 @@ public class Game {
     public Player[] getPlayers() {
         return players;
     }
-
-    private Field deck = new Field(x, y);
 
     public Field getDeck() {
         return deck;
