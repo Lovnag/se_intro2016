@@ -105,25 +105,25 @@ public class RunningTheGame {
         char[][] duhField =
                 new char[3][3];
         Field f = new Field(3, 3, duhField);
-        RandomGenPlayer PlayerX = new RandomGenPlayer('X', "PlayerX");
-        RandomGenPlayer PlayerO = new RandomGenPlayer('O', "PlayerO");
-        Player[] players = {PlayerX, PlayerO};
+        RandomGenPlayer playerX = new RandomGenPlayer('X', "PlayerX");
+        RandomGenPlayer playerO = new RandomGenPlayer('O', "PlayerO");
+        Player[] players = {playerX, playerO};
         for (int i = 0; i != numberOfGames; i++) {
 
             TurnCoordinates currentCoordinates = new TurnCoordinates(0, 0);
             int turnCounter = 0;
-            int CurrPlayerNumber;
+            int currPlayerNumber;
 
             f.initialize();
             duhField[0][0] = '`';
             Game newGame = new Game(3, 3, players, f);
             while (!win.met(currentCoordinates, newGame.getDeck(), true)) {
-                CurrPlayerNumber = turnCounter % 2;
+                currPlayerNumber = turnCounter % 2;
                 while (!newGame.getDeck().canTurn(currentCoordinates)) {
-                    currentCoordinates = players[CurrPlayerNumber].gettingATurn(3, 3);
+                    currentCoordinates = players[currPlayerNumber].gettingATurn(3, 3);
                 }
 
-                newGame.createATurn(currentCoordinates, players[CurrPlayerNumber]);
+                newGame.createATurn(currentCoordinates, players[currPlayerNumber]);
                 turnCounter++;
             }
             turnCounter--;
