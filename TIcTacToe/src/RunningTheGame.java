@@ -96,26 +96,26 @@ public class RunningTheGame {
     }
 
 
-    public String theArtificialIdiots(int numberOfGames) {
+    public String theArtificialIdiots(final int numberOfGames) {
 
         Double winRateForX = 0.0;
         Double winRateForO = 0.0;
         Double draws = 0.0;
+        WinConditions win = new WinConditions(3);
+        char[][] duhField =
+                new char[3][3];
+        Field f = new Field(3, 3, duhField);
+        RandomGenPlayer PlayerX = new RandomGenPlayer('X', "PlayerX");
+        RandomGenPlayer PlayerO = new RandomGenPlayer('O', "PlayerO");
+        Player[] players = {PlayerX, PlayerO};
         for (int i = 0; i != numberOfGames; i++) {
-            WinConditions win = new WinConditions(3);
-            char[][] duhField =
-                    new char[3][3];
 
             TurnCoordinates currentCoordinates = new TurnCoordinates(0, 0);
             int turnCounter = 0;
             int CurrPlayerNumber;
 
-            Field f = new Field(3, 3, duhField);
             f.initialize();
             duhField[0][0] = '`';
-            RandomGenPlayer PlayerX = new RandomGenPlayer('X', "PlayerX");
-            RandomGenPlayer PlayerO = new RandomGenPlayer('O', "PlayerO");
-            Player[] players = {PlayerX, PlayerO};
             Game newGame = new Game(3, 3, players, f);
             while (!win.met(currentCoordinates, newGame.getDeck(), true)) {
                 CurrPlayerNumber = turnCounter % 2;
@@ -126,10 +126,11 @@ public class RunningTheGame {
                 newGame.createATurn(currentCoordinates, players[CurrPlayerNumber]);
                 turnCounter++;
             }
+            turnCounter--;
 
             if (win.met(currentCoordinates, newGame.getDeck(), false)) {
 
-                if (players[turnCounter % 2] == PlayerX) {
+                if (turnCounter % 2 == 0) {
                     winRateForX++;
                 } else {
                     winRateForO++;
